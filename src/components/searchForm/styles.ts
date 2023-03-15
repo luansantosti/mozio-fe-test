@@ -12,6 +12,7 @@ export const LeftWrapper = styled('div')`
 
 export const RightWrapper = styled('div')`
   flex: 1;
+  padding-top: 27px;
 `
 
 export const ButtonWrapper = styled('div')`

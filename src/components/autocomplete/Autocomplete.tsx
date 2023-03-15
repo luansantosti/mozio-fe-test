@@ -24,8 +24,8 @@ const emptyOption = {
   lon: 0
 }
 
-const Autocomplete = ({ label, name, errorMessage, index }: AutocompleteProps) => {
-  const { control, formState: { errors }, watch } = useFormContext()
+const Autocomplete = ({ label, name, errorMessage }: AutocompleteProps) => {
+  const { control } = useFormContext()
   const [isLoading, setIsLoading] = useState(false)
   const [value, setValue] = useState<Option | null>(null);
   const [options, setOptions] = useState<Option[]>([]);
@@ -52,9 +52,6 @@ const Autocomplete = ({ label, name, errorMessage, index }: AutocompleteProps) =
     }, 500)
   }
 
-  const errorsFormatted = errors.cities as any
-  const error = errorsFormatted?.[index]
-
   return (
     <Controller 
       name={name}
@@ -62,7 +59,7 @@ const Autocomplete = ({ label, name, errorMessage, index }: AutocompleteProps) =
       rules={{ 
         validate: (value) => !!value?.title || errorMessage,
       }}
-      render={({ field: { ref, onChange, ...field }}) => (
+      render={({ field: { ref, onChange, ...field }, fieldState: { error }}) => (
         <MUIAutocomplete
           ref={ref}
           sx={{ width: 300 }}
@@ -72,7 +69,6 @@ const Autocomplete = ({ label, name, errorMessage, index }: AutocompleteProps) =
             setValue(newValue || emptyOption);
             onChange(newValue || emptyOption)
           }}
-          // isOptionEqualToValue={(option, value) => option.title === value.title}
           defaultValue={null} 
           filterOptions={(x) => x}
           getOptionLabel={(option) => option.title}
@@ -84,7 +80,7 @@ const Autocomplete = ({ label, name, errorMessage, index }: AutocompleteProps) =
               {...params}
               {...field}
               label={label}
-              error={!!error?.message}
+              error={!!error}
               helperText={error?.message}
               InputProps={{
                 ...params.InputProps,

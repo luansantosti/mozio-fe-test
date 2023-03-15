@@ -1,13 +1,15 @@
 import { Button } from "@mui/material";
 import { useForm, FormProvider } from "react-hook-form";
 
+import QuantityInput from '../quantityInput'
 import CitiesTimeline from '../citiesTimeline';
 import * as S from './styles'
 
 const SearchForm = () => {
   const methods = useForm({
     defaultValues: {
-      cities: [{ name: 'origin' }, { name: 'destination' }]
+      cities: [{ name: 'origin' }, { name: 'destination' }],
+      passengers: 1
     }
   });
 
@@ -21,7 +23,7 @@ const SearchForm = () => {
         </S.LeftWrapper>
 
         <S.RightWrapper>
-          PASSENGERS
+          <QuantityInput label='Passengers' name='passengers' />
         </S.RightWrapper>
 
         <S.ButtonWrapper>
