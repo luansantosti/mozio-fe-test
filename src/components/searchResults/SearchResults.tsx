@@ -1,7 +1,7 @@
 import { Button, Typography } from '@mui/material';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, createSearchParams } from 'react-router-dom';
 import { calculateRoute, getCitiesFromParam } from "../../data/server";
 import Loading from '../loading';
 import RoutesTimeline from '../routesTimeline'
@@ -83,7 +83,10 @@ const Results = ({ params }: SearchResultsProps) => {
         </>
       )}
 
-      <Button variant='contained' onClick={() => navigate(-1)}>Back</Button>
+      <Button variant='contained' onClick={() => navigate({
+        pathname: '/',
+        search: createSearchParams(params).toString()
+      })}>Back</Button>
     </S.Wrapper>
   )
 }
