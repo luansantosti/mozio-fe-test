@@ -47,7 +47,7 @@ const CityAutocomplete = ({ label, name, errorMessage }: CityAutocomplete) => {
       setIsLoading(true)
     }
 
-    debounceRef.current = setTimeout(() => {
+    debounceRef.current = window.setTimeout(() => {
       // fake edge case
       if (value?.toLowerCase() === 'fail') {
         setError(name, {
