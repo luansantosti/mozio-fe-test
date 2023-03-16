@@ -11,7 +11,7 @@ import * as S from './styles'
 import DatePicker from "../datePicker";
 import SyncDataUrl from "../syncDataUrl";
 import { getCitiesFromParam } from "../../utils/getCitiesFromParam";
-import { emptyOption } from "../autocomplete/Autocomplete";
+import { emptyOption } from "../cityAutocomplete/CityAutocomplete";
 
 interface City {
   title: string;

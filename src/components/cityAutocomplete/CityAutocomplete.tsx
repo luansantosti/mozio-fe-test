@@ -11,7 +11,7 @@ interface Option {
   lon: number;
 }
 
-interface AutocompleteProps {
+interface CityAutocomplete {
   label: string;
   name: string;
   errorMessage: string;
@@ -24,7 +24,7 @@ export const emptyOption = {
   lon: 0
 }
 
-const Autocomplete = ({ label, name, errorMessage }: AutocompleteProps) => {
+const CityAutocomplete = ({ label, name, errorMessage }: CityAutocomplete) => {
   const { control, watch } = useFormContext()
   const [isLoading, setIsLoading] = useState(false)
   const debounceRef = useRef<number | undefined>()
@@ -103,4 +103,4 @@ const Autocomplete = ({ label, name, errorMessage }: AutocompleteProps) => {
   )
 }
 
-export default Autocomplete
+export default CityAutocomplete
