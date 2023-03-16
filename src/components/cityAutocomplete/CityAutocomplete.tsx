@@ -25,7 +25,7 @@ export const emptyOption = {
 }
 
 const CityAutocomplete = ({ label, name, errorMessage }: CityAutocomplete) => {
-  const { control, watch } = useFormContext()
+  const { control, watch, setError, clearErrors } = useFormContext()
   const [isLoading, setIsLoading] = useState(false)
   const debounceRef = useRef<number | undefined>()
   const [options, setOptions] = useState<Option[]>(getCities(watch(name)?.title) || []);
@@ -34,6 +34,7 @@ const CityAutocomplete = ({ label, name, errorMessage }: CityAutocomplete) => {
   const handleChange = (e: React.SyntheticEvent, value: string) => {
     const { type } = e || {}
 
+    clearErrors(name)
     clearTimeout(debounceRef.current)
 
     if (value === '') {
@@ -47,6 +48,22 @@ const CityAutocomplete = ({ label, name, errorMessage }: CityAutocomplete) => {
     }
 
     debounceRef.current = setTimeout(() => {
+      // fake edge case
+      if (value?.toLowerCase() === 'fail') {
+        setError(name, {
+          message: 'An error happened, please try a different city'
+        })
+        setValue({
+          title: value,
+          lat: 0,
+          lon: 0,
+        })
+
+        setOptions([])
+        setIsLoading(false)
+        return null
+      }
+
       setOptions(getCities(value))
       setIsLoading(false)
     }, 500)
@@ -57,7 +74,7 @@ const CityAutocomplete = ({ label, name, errorMessage }: CityAutocomplete) => {
       name={name}
       control={control}
       rules={{ 
-        validate: (value) => !!value?.title || errorMessage,
+        validate: (value) => (!!value?.title || value?.title?.toLowerCase() === 'fail') || errorMessage,
       }}
       render={({ field: { ref, onChange, ...field }, fieldState: { error }}) => (
         <MUIAutocomplete

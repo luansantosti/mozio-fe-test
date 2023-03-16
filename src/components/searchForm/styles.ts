@@ -1,4 +1,5 @@
 import { styled } from "@mui/system";
+import { Button as MUIButton } from "@mui/material";
 
 export const FormWrapper = styled('form')`
   display: flex;
@@ -23,3 +24,18 @@ export const ButtonWrapper = styled('div')`
   display: flex;
   justify-content: center;
 `
+
+export const Button = styled(MUIButton, {
+  shouldForwardProp: (prop: PropertyKey) => prop !== 'showAsDisabled'
+})<{ showAsDisabled: boolean }>(
+  ({ showAsDisabled }) => `
+    background-color: ${showAsDisabled ? '#f4f4f4' : '#1976d2'};
+    color: ${showAsDisabled ? '#808080' : '#fff'};
+    cursor: ${showAsDisabled ? 'default' : 'cursor'};
+
+    &:hover {
+      background-color: ${showAsDisabled ? '#f4f4f4' : '#1565c0'};
+      color: ${showAsDisabled ? '#808080' : '#fff'}
+    }
+  `
+)

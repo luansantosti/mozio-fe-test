@@ -58,7 +58,7 @@ const Results = ({ params }: SearchResultsProps) => {
     return <Loading loadingMessage={loadingMessage} />
   }
 
-  const totalDistance = routes.reduce((acc, route: any) => {
+  const totalDistance = routes?.reduce((acc, route: any) => {
     if (!route.distanceToNext) {
       return acc
     }

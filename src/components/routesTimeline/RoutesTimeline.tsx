@@ -27,7 +27,7 @@ const RouteTimeline = ({ routes }: RouteTimelineProps) => (
           <>
             <TimelineItem>
               <TimelineSeparator>
-                {isFinalDestinationCity ? <PlaceOutlined sx={{ margin: '7px -5px 0 -7px' }} /> : <TimelineDot variant="outlined" />}
+                {isFinalDestinationCity ? <PlaceOutlined sx={{ color: '#FF0000', margin: '7px -5px 0 -7px' }} /> : <TimelineDot variant="outlined" />}
                 {!isFinalDestinationCity && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>{route?.title}</TimelineContent>

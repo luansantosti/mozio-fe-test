@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
 import { addDays, format } from 'date-fns'
 import { useEffect, useState } from "react";
@@ -73,6 +72,8 @@ const SearchForm = ({ params }: SearchFormProps) => {
     })
   };
 
+  const { formState: { isValid } } = methods
+
   return (
     <FormProvider {...methods}> 
       <S.FormWrapper onSubmit={methods.handleSubmit(onSubmit)}>
@@ -87,7 +88,7 @@ const SearchForm = ({ params }: SearchFormProps) => {
         </S.RightWrapper>
 
         <S.ButtonWrapper>
-          <Button type="submit" variant="contained">Submit</Button>
+          <S.Button showAsDisabled={!isValid} type="submit" variant="contained">Submit</S.Button>
         </S.ButtonWrapper>
       </S.FormWrapper>
       <SyncDataUrl />
