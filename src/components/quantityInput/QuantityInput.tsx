@@ -1,4 +1,3 @@
-import { TextField } from "@mui/material";
 import { useFormContext, Controller } from "react-hook-form";
 import * as S from './styles'
 
@@ -12,10 +11,6 @@ const QuantityInput = ({ label, name }: QuantityInputProps) => {
   
   const handleUpdatePassengers = (e: React.MouseEvent, value: number) => {
     e.preventDefault()
-
-    if (value < 0) {
-      return null
-    }
 
     setValue(name, value, { shouldValidate: true })
   }
@@ -34,10 +29,10 @@ const QuantityInput = ({ label, name }: QuantityInputProps) => {
               label='-'
               value={value}
             />
-            <TextField
+            <S.TextField
               InputProps={{
                 readOnly: true,
-                inputProps: { min: 0,  }
+                inputProps: { min: 0 }
               }}
               InputLabelProps={{
                 shrink: true,
@@ -46,7 +41,7 @@ const QuantityInput = ({ label, name }: QuantityInputProps) => {
               error={!!error}
               helperText={error?.message}
               type='number' 
-              label={label} 
+              label={label}
             />
             <Button 
               onClick={handleUpdatePassengers}
@@ -74,8 +69,18 @@ const Button = ({
   label,
   value
 }: ButtonProps) => {
+  const getValidValue = () => {
+    const newValue = value - 1
+    
+    if (newValue < 0) {
+      return 0
+    } 
+
+    return newValue
+  }
+
   const shouldIncrease = action === 'increase'
-  const newValue = shouldIncrease ? value + 1 : value - 1
+  const newValue = shouldIncrease ? value + 1 : getValidValue()
   const disabled = !shouldIncrease && value === 0
 
   return (
