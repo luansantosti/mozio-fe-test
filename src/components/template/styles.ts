@@ -10,6 +10,10 @@ export const Wrapper = styled('div')`
   min-height: 100vh;
   background: url(${appBackground}) no-repeat center;
   background-size: 96%;
+
+  @media (max-width: 1200px) {
+    background-size: cover;
+  }
 `
 
 export const Content = styled('div')`
@@ -18,6 +22,13 @@ export const Content = styled('div')`
   background: #fff;
   border-radius: 1rem;
   padding: 40px 80px;
+
+  @media (max-width: 900px) {
+    padding: 20px;
+    width: 420px;
+    min-width: 360px;
+    max-width: 100%;
+  }
 `
 
 
