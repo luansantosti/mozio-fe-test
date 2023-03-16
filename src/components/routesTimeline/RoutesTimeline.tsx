@@ -38,7 +38,7 @@ const RouteTimeline = ({ routes }: RouteTimelineProps) => (
                 <TimelineSeparator>
                   <TimelineConnector />
                 </TimelineSeparator>
-                <TimelineContent>{route.distanceToNext} km</TimelineContent>
+                <TimelineContent>{route.distanceToNext.toFixed(2)} km</TimelineContent>
               </TimelineItem>
             )}
           </React.Fragment>

@@ -77,7 +77,7 @@ const Results = ({ params }: SearchResultsProps) => {
         <>
           <RoutesTimeline routes={routes} />
 
-          <Typography><b>{totalDistance} km</b> is total distance</Typography>
+          <Typography><b>{totalDistance?.toFixed(2)} km</b> is total distance</Typography>
           <Typography><b>{passengers}</b> passengers</Typography>
           <Typography fontWeight='bold'>{format(new Date(date), 'LLL dd, yyyy')}</Typography>
         </>
