@@ -16,8 +16,6 @@ const SyncDataUrl = () => {
   const handleUpdateUrl = (data: FieldValues) => {
     const { passengers, date, cities } = data
 
-    console.log('cities', cities)
-
     const citiesFormatted = cities?.filter((city: City) => city.title).map((city: City) => city.title)
 
     

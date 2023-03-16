@@ -48,8 +48,11 @@ const Results = ({ params }: SearchResultsProps) => {
       }
     }
 
-    if (cities.length) {
+    if (cities) {
       loadCities()
+    } else {
+      setIsLoading(false)
+      setError('Oops! Something went wrong!')
     }
   }, [])
   
@@ -68,7 +71,7 @@ const Results = ({ params }: SearchResultsProps) => {
 
   return (
     <S.Wrapper>
-      {error ? (
+      {error || !routes?.length ? (
         <Typography fontWeight='bold'>{error}</Typography>  
       ) : (
         <>
