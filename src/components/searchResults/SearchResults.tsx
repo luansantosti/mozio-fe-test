@@ -1,6 +1,7 @@
-import { Typography } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import { format } from 'date-fns';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { calculateRoute, getCitiesFromParam } from "../../data/server";
 import Loading from '../loading';
 import RoutesTimeline from '../routesTimeline'
@@ -19,6 +20,7 @@ const Results = ({ params }: SearchResultsProps) => {
   const [loadingMessage, setLoadingMessage] = useState('Calculating your route')
   const [error, setError] = useState('')
   const [routes, setRoutes] = useState([])
+  const navigate = useNavigate()
 
   const handleRoute = async (response: any) => {
     setLoadingMessage('Almost there...')
@@ -51,18 +53,28 @@ const Results = ({ params }: SearchResultsProps) => {
     }
   }, [])
   
-  console.log('route', routes)
 
   if (isLoading) {
     return <Loading loadingMessage={loadingMessage} />
   }
 
+  const totalDistance = routes.reduce((acc, route: any) => {
+    if (!route.distanceToNext) {
+      return acc
+    }
+
+    return acc + route.distanceToNext
+  }, 0)
+
   return (
     <S.Wrapper>
       <RoutesTimeline routes={routes} />
 
+      <Typography><b>{totalDistance} km</b> is total distance</Typography>
       <Typography><b>{passengers}</b> passengers</Typography>
-      <Typography>{format(new Date(date), 'LLL dd, yyyy')}</Typography>
+      <Typography fontWeight='bold'>{format(new Date(date), 'LLL dd, yyyy')}</Typography>
+
+      <Button variant='contained' onClick={() => navigate(-1)}>Back</Button>
     </S.Wrapper>
   )
 }
