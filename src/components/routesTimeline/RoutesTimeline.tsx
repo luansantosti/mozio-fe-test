@@ -28,7 +28,7 @@ const RouteTimeline = ({ routes }: RouteTimelineProps) => (
           <React.Fragment key={index}>
             <TimelineItem>
               <TimelineSeparator>
-                {isFinalDestinationCity ? <PlaceOutlined sx={{ color: '#FF0000', margin: '7px -5px 0 -7px' }} /> : <TimelineDot variant="outlined" />}
+                {isFinalDestinationCity ? <S.PlaceOutlined /> : <TimelineDot variant="outlined" />}
                 {!isFinalDestinationCity && <TimelineConnector />}
               </TimelineSeparator>
               <TimelineContent>{route?.title}</TimelineContent>

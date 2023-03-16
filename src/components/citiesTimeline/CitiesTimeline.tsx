@@ -1,13 +1,8 @@
 import { useFieldArray, useFormContext } from "react-hook-form"
 import MUITimeline from '@mui/lab/Timeline'
 import TimelineItem, { timelineItemClasses } from '@mui/lab/TimelineItem'
-import TimelineSeparator from '@mui/lab/TimelineSeparator'
-import TimelineConnector from '@mui/lab/TimelineConnector'
 import TimelineContent from '@mui/lab/TimelineContent'
 import TimelineDot from '@mui/lab/TimelineDot'
-import PlaceOutlined from '@mui/icons-material/PlaceOutlined'
-import AddCircleOutline from '@mui/icons-material/AddCircleOutline'
-import Button from '@mui/material/Button';
 
 import * as S from './styles'
 import CityAutocomplete from "../cityAutocomplete"
@@ -36,11 +31,11 @@ const CitiesTimeline = () => {
 
         return (
           <TimelineItem key={field.id}>
-            <TimelineSeparator sx={{ marginTop: '16px' }}>
-              {isFinalDestinationCity ? <PlaceOutlined sx={{ margin: '7px -5px 0 -7px' }} /> : <TimelineDot variant="outlined" />}
+            <S.TimelineSeparator>
+              {isFinalDestinationCity ? <S.PlaceOutlined /> : <TimelineDot variant="outlined" />}
               
-              {!isFinalDestinationCity && <TimelineConnector sx={{ marginBottom: '-12px', height: '50px' }} />} 
-            </TimelineSeparator>
+              {!isFinalDestinationCity && <S.TimelineConnector />} 
+            </S.TimelineSeparator>
             <TimelineContent>
               <S.CityWrapper>
                 <CityAutocomplete 
@@ -60,17 +55,14 @@ const CitiesTimeline = () => {
       })}
 
       <TimelineItem>
-        <TimelineSeparator sx={{ marginTop: '16px' }}>
-          <AddCircleOutline sx={{ margin: '7px -5px 0 -7px' }} />
-        </TimelineSeparator>
-        <TimelineContent sx={{ display: 'flex', alignItems: 'center' }}>
-          <Button 
-            sx={{ textTransform: 'none' }} 
-            onClick={() => append(emptyOption)}
-          >
+        <S.TimelineSeparator>
+          <S.AddCircleOutline />
+        </S.TimelineSeparator>
+        <S.TimelineContent>
+          <S.Button onClick={() => append(emptyOption)}>
             Add destination
-          </Button>
-        </TimelineContent>
+          </S.Button>
+        </S.TimelineContent>
       </TimelineItem>
     </MUITimeline>
   );
