@@ -35,7 +35,7 @@ const SearchForm = ({ params }: SearchFormProps) => {
     defaultValues: {
       cities: initialCities,
       passengers: passengers ? parseInt(passengers) : 1,
-      date: new Date(date) || addDays(new Date, 1)
+      date: date ? new Date(date) : addDays(new Date, 1)
     }
   });
 
