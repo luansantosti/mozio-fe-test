@@ -1,16 +1,15 @@
-import { useParams, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-import { formattedCities } from "../../data/cities";
 import SearchForm from "../../components/searchForm";
 
 const Home = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const params = Object.fromEntries(
     new URLSearchParams(searchParams)
   );
 
-  return <SearchForm/>
+  return <SearchForm params={params} />
 }
 
 export default Home

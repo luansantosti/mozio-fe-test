@@ -1,5 +1,5 @@
 import { styled } from "@mui/system";
-import { Button as MUIButton } from "@mui/material";
+import { Button as MUIButton, TextField as MUITextField } from "@mui/material";
 
 export const Wrapper = styled('div')`
   position: relative;
@@ -17,6 +17,13 @@ export const Wrapper = styled('div')`
     text-align: center;
   }
 `
+
+export const TextField = styled(MUITextField)({
+  '& .MuiFormHelperText-root.Mui-error': {
+    position: 'absolute',
+    top: '100%'
+  }
+});
 
 export const Button = styled(MUIButton, {
   shouldForwardProp: (prop: PropertyKey) => prop !== 'alignRight'

@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { useFormContext, Controller, FieldError } from "react-hook-form";
+import { useFormContext, Controller } from "react-hook-form";
 import TextField from "@mui/material/TextField";
 import MUIAutocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -18,18 +18,18 @@ interface AutocompleteProps {
   index: number;
 }
 
-const emptyOption = {
+export const emptyOption = {
   title: '',
   lat: 0,
   lon: 0
 }
 
 const Autocomplete = ({ label, name, errorMessage }: AutocompleteProps) => {
-  const { control } = useFormContext()
+  const { control, watch } = useFormContext()
   const [isLoading, setIsLoading] = useState(false)
-  const [value, setValue] = useState<Option | null>(null);
-  const [options, setOptions] = useState<Option[]>([]);
   const debounceRef = useRef<number | undefined>()
+  const [options, setOptions] = useState<Option[]>(getCities(watch(name)?.title) || []);
+  const [value, setValue] = useState<Option | null>(watch(name) || null);
 
   const handleChange = (e: React.SyntheticEvent, value: string) => {
     const { type } = e || {}
@@ -74,6 +74,8 @@ const Autocomplete = ({ label, name, errorMessage }: AutocompleteProps) => {
           getOptionLabel={(option) => option.title}
           options={options}
           value={value}
+          isOptionEqualToValue={(option, value) => option.title === value.title}
+          noOptionsText='No options' // TODO VALIDATE FAIL
           loading={isLoading}
           renderInput={(params) => (
             <TextField

@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import * as S from './styles'
 import Autocomplete from "../autocomplete"
 import { CITY_ORIGIN, CITY_DESTINATION, ERROR_MESSAGE } from "./utils"
+import { emptyOption } from "../autocomplete/Autocomplete"
 
 const CitiesTimeline = () => {
   const { control } = useFormContext()
@@ -65,7 +66,7 @@ const CitiesTimeline = () => {
         <TimelineContent sx={{ display: 'flex', alignItems: 'center' }}>
           <Button 
             sx={{ textTransform: 'none' }} 
-            onClick={() => append({ name: 'destination' }, { shouldFocus: true })}
+            onClick={() => append(emptyOption)}
           >
             Add destination
           </Button>

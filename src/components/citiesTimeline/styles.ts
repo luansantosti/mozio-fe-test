@@ -9,4 +9,7 @@ export const CityWrapper = styled('div')`
 
 export const HighlightOff = styled(MUIHighlightOff)`
   cursor: pointer;
+  position: absolute;
+  right: -20px;
+  top: 22px;
 `

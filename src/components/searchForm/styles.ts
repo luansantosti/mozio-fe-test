@@ -11,8 +11,11 @@ export const LeftWrapper = styled('div')`
 `
 
 export const RightWrapper = styled('div')`
-  flex: 1;
-  padding-top: 27px;
+  flex: 1.5;
+  padding-top: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 `
 
 export const ButtonWrapper = styled('div')`
