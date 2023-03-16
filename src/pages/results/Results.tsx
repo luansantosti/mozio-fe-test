@@ -8,7 +8,7 @@ const Results = () => {
     new URLSearchParams(searchParams)
   );
 
-  return <SearchResults />
+  return <SearchResults params={params} />
 }
 
 export default Results

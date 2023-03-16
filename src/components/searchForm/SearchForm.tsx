@@ -1,7 +1,8 @@
 import { Button } from "@mui/material";
-import { useForm, FormProvider } from "react-hook-form";
-import { addDays } from 'date-fns'
+import { useForm, FormProvider, FieldValues } from "react-hook-form";
+import { addDays, format } from 'date-fns'
 import { useEffect, useState } from "react";
+import { useNavigate, createSearchParams } from "react-router-dom";
 
 import Loading from "../loading";
 import QuantityInput from '../quantityInput'
@@ -11,6 +12,12 @@ import DatePicker from "../datePicker";
 import SyncDataUrl from "../syncDataUrl";
 import { getCitiesFromParam } from "../../utils/getCitiesFromParam";
 import { emptyOption } from "../autocomplete/Autocomplete";
+
+interface City {
+  title: string;
+  lat: number;
+  lon: number;
+}
 
 interface SearchFormProps {
   params: {
@@ -23,6 +30,7 @@ const initialCities = [emptyOption, emptyOption]
 const SearchForm = ({ params }: SearchFormProps) => {
   const { passengers, date, cities } = params
   const [isLoading, setIsLoading] = useState(!!cities?.length)
+  const navigate = useNavigate()
 
   const methods = useForm({
     defaultValues: {
@@ -50,7 +58,20 @@ const SearchForm = ({ params }: SearchFormProps) => {
     return <Loading />
   }
 
-  const onSubmit = (data: any) => console.log('data', data);
+  const onSubmit = (data: FieldValues) => {
+    const { passengers, cities, date } = data
+
+    const citiesFormatted = cities?.filter((city: City) => city.title).map((city: City) => city.title)
+    
+    navigate({
+      pathname: '/result',
+      search: createSearchParams({
+        passengers,
+        cities: citiesFormatted?.join(','),
+        date: format(date, 'MM-dd-yyyy'),
+      }).toString()
+    })
+  };
 
   return (
     <FormProvider {...methods}> 
