@@ -29,8 +29,8 @@ const Results = ({ params }: SearchResultsProps) => {
       const newRoutes: any = await calculateRoute(response)
       
       setRoutes(newRoutes)
-    } catch(err) {
-      // setError()
+    } catch(err: any) {
+      setError(err)
     } finally {
       setIsLoading(false)
     }
@@ -68,11 +68,17 @@ const Results = ({ params }: SearchResultsProps) => {
 
   return (
     <S.Wrapper>
-      <RoutesTimeline routes={routes} />
+      {error ? (
+        <Typography fontWeight='bold'>{error}</Typography>  
+      ) : (
+        <>
+          <RoutesTimeline routes={routes} />
 
-      <Typography><b>{totalDistance} km</b> is total distance</Typography>
-      <Typography><b>{passengers}</b> passengers</Typography>
-      <Typography fontWeight='bold'>{format(new Date(date), 'LLL dd, yyyy')}</Typography>
+          <Typography><b>{totalDistance} km</b> is total distance</Typography>
+          <Typography><b>{passengers}</b> passengers</Typography>
+          <Typography fontWeight='bold'>{format(new Date(date), 'LLL dd, yyyy')}</Typography>
+        </>
+      )}
 
       <Button variant='contained' onClick={() => navigate(-1)}>Back</Button>
     </S.Wrapper>

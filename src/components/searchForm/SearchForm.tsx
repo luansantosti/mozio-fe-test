@@ -1,5 +1,5 @@
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
-import { addDays, format } from 'date-fns'
+import { addDays, format, isValid as isDateValid } from 'date-fns'
 import { useEffect, useState } from "react";
 import { useNavigate, createSearchParams } from "react-router-dom";
 
@@ -35,14 +35,14 @@ const SearchForm = ({ params }: SearchFormProps) => {
     defaultValues: {
       cities: initialCities,
       passengers: passengers ? parseInt(passengers) : 1,
-      date: date ? new Date(date) : addDays(new Date, 1)
+      date: isDateValid(date) ? new Date(date) : addDays(new Date, 1)
     }
   });
 
   useEffect(() => {
     const loadCities = async () => {
       const response: any = await getCitiesFromParam(cities)
-      const responseFormatted = response?.length == 1 ? [...response, emptyOption] : response
+      const responseFormatted = response?.length === 1 ? [...response, emptyOption] : response
 
       methods.setValue('cities', responseFormatted)
       setIsLoading(false)

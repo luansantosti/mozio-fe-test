@@ -1,3 +1,4 @@
+import React from 'react'
 import Timeline from '@mui/lab/Timeline';
 import TimelineItem from '@mui/lab/TimelineItem';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
@@ -24,7 +25,7 @@ const RouteTimeline = ({ routes }: RouteTimelineProps) => (
         const isFinalDestinationCity = routes.length === (index + 1)
 
         return (
-          <>
+          <React.Fragment key={index}>
             <TimelineItem>
               <TimelineSeparator>
                 {isFinalDestinationCity ? <PlaceOutlined sx={{ color: '#FF0000', margin: '7px -5px 0 -7px' }} /> : <TimelineDot variant="outlined" />}
@@ -40,7 +41,7 @@ const RouteTimeline = ({ routes }: RouteTimelineProps) => (
                 <TimelineContent>{route.distanceToNext} km</TimelineContent>
               </TimelineItem>
             )}
-          </>
+          </React.Fragment>
         )
       })}
     </Timeline>

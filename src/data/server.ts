@@ -57,6 +57,8 @@ const haversine = ({ cityA, cityB }: HaversineProps) => {
   return parseFloat((rad * c).toFixed(2))
 }
 
+const CITY_EDGE_CASE = 'Dijon'
+
 export const calculateRoute = (cities: City[]) => {
   const citiesWithDistances = cities.map((city, index) => {
     if (cities.length === index + 1) {
@@ -74,7 +76,14 @@ export const calculateRoute = (cities: City[]) => {
 
   return new Promise<(City | null | undefined)[]>((resolve, reject) => {
     setTimeout(() => {
-      resolve(citiesWithDistances)
+      // fake edge case
+      const hasDijonIncluded = citiesWithDistances?.find(city => city.title === CITY_EDGE_CASE)
+
+      if (hasDijonIncluded) {
+        reject('Oops! Something went wrong!')
+      } else {
+        resolve(citiesWithDistances)
+      }
     }, 1500)
   })
 }
