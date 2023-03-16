@@ -26,6 +26,7 @@ export const TimelineSeparator = styled(MUITimelineSeparator)`
 
 export const AddCircleOutline = styled(MUIAddCircleOutline)`
   margin: 7px -5px 0 -7px;
+  cursor: pointer;
 `
 
 export const PlaceOutlined = styled(MUIPlaceOutlined)`

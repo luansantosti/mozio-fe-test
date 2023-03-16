@@ -56,7 +56,7 @@ const CitiesTimeline = () => {
 
       <TimelineItem>
         <S.TimelineSeparator>
-          <S.AddCircleOutline />
+          <S.AddCircleOutline onClick={() => append(emptyOption)} />
         </S.TimelineSeparator>
         <S.TimelineContent>
           <S.Button onClick={() => append(emptyOption)}>
