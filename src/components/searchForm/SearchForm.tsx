@@ -10,7 +10,7 @@ import CitiesTimeline from '../citiesTimeline';
 import * as S from './styles'
 import DatePicker from "../datePicker";
 import SyncDataUrl from "../syncDataUrl";
-import { getCitiesFromParam } from "../../utils/getCitiesFromParam";
+import { getCitiesFromParam } from "../../data/server";
 import { emptyOption } from "../cityAutocomplete/CityAutocomplete";
 
 interface City {
